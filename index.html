@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="database.js"></script>
     <title>Booking Hub</title>
 </head>
 <body>
@@ -12,18 +12,47 @@
         <h1>Welcome to Booking Hub</h1>
     </header>
     <main>
-        <section id="booking-form">
-            <h2>Book Your Stay</h2>
+        <div id="login">
             <form id="form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+                <label for="name">Nome utente:</label>
+                <input type="text" id="name" name="name" placeholder="Nome Utente" required>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="password" aria-placeholder="Password">Password:</label>
+                <input type="password" id="psw" name="psw" placeholder="Password" required>
 
-                <button type="submit">Submit</button>
+                <button id="accedi" type="submit" onclick="accedi()">Accedi</button>
             </form>
+
+            <p id="psw_dimenticata">Password dimenticata?</p>
         </section>
     </main>
 </body>
+
+<script>
+    async function accedi(event) {
+        event.preventDefault(); // Previene il comportamento predefinito del form
+        const username = document.getElementById("name").value;
+        const password = document.getElementById("psw").value;
+
+        try {
+            const response = await fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                alert(data.message);
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error('Errore durante la richiesta:', error);
+            alert('Errore del server');
+        }
+    }
+</script>
 </html>

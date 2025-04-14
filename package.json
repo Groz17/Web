@@ -1,0 +1,17 @@
+{
+    "name": "booking-hub",
+    "version": "1.0.0",
+    "description": "Progetto per la gestione di un Booking Hub con connessione a PostgreSQL",
+    "main": "database.js",
+    "scripts": {
+        "start": "node database.js"
+    },
+    "keywords": [],
+    "author": "simo0",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^5.1.0",
+        "pg": "^8.14.1"
+    },
+    "type": "commonjs"
+}
